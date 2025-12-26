@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 
 // Serve frontend
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(path.join(__dirname, "../Frontend")));
 
 // Root route -> frontend index.html
 app.get("/", (req, res) => {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Slot Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-area">
+            <h1>Staff Dashboard</h1>
+            <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+        </div>
+
+        <div class="card">
+            <h2>Add New Slot</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <label>Appointment Date</label>
+                    <input type="date" id="newDate">
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <label>Time Slot</label>
+                    <input type="time" id="newTime">
+                </div>
+            </div>
+            <button class="btn-primary" style="margin-top: 1.5rem;" onclick="addNewSlot()">Create Slot</button>
+        </div>
+
+        <div class="card">
+            <h2>Existing Slots</h2>
+            <div id="adminSlotList" class="slot-grid">
+                <!-- Manageable slots will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

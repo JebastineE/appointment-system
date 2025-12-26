@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Appointment System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-area">
+            <h1>Patient Dashboard</h1>
+            <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+        </div>
+
+        <!-- Section for showing success messages -->
+        <div id="userMessageContainer"></div>
+
+        <div class="card">
+            <h2>Book an Appointment</h2>
+            <p>Select an available slot below to confirm your visit.</p>
+            
+            <div id="slotDisplay" class="slot-grid">
+                <!-- Slots will be injected here by user.js -->
+            </div>
+        </div>
+    </div>
+
+    <script src="user.js"></script>
+</body>
+</html>

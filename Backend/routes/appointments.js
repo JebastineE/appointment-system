@@ -1,19 +1,19 @@
 import express from "express";
 const router = express.Router();
 
-/* -------- USERS (DEMO LOGIN) -------- */
+
 const users = [
   { email: "admin@mail.com", password: "admin", role: "admin" },
   { email: "user@mail.com", password: "user", role: "user" }
 ];
 
-/* -------- DATA -------- */
+
 let slots = [];
 let bookings = [];
 let slotId = 1;
 let bookingId = 1;
 
-/* -------- LOGIN -------- */
+
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
   const user = users.find(
@@ -27,7 +27,7 @@ router.post("/login", (req, res) => {
   res.json({ role: user.role });
 });
 
-/* -------- USER -------- */
+
 router.get("/slots", (req, res) => {
   res.json(slots.filter(s => !s.booked));
 });
@@ -48,7 +48,7 @@ router.post("/book/:id", (req, res) => {
   res.json({ message: "Appointment booked" });
 });
 
-/* -------- ADMIN -------- */
+
 router.post("/admin/slot", (req, res) => {
   slots.push({
     id: slotId++,

@@ -3,29 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard - Appointment System</title>
+    <title>Patient Portal | City Hospital</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="header-area">
-            <h1>Patient Dashboard</h1>
-            <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+<body class="dashboard-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">City<span>Hospital</span></div>
+            <ul class="nav-links">
+                <li id="userGreeting" class="nav-greeting"></li>
+                <li><a href="#" onclick="showInfo('contact')">Contact Us</a></li>
+                <li><a href="#" onclick="showInfo('help')">Help</a></li>
+                <li id="logoutNav"><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <!-- Section for showing success messages -->
-        <div id="userMessageContainer"></div>
+    <main class="dashboard-container">
+        <header class="page-header">
+            <h1>Book Appointment</h1>
+            <p>Select a specialist and pick an available time slot.</p>
+        </header>
 
-        <div class="card">
-            <h2>Book an Appointment</h2>
-            <p>Select an available slot below to confirm your visit.</p>
-            
-            <div id="slotDisplay" class="slot-grid">
-                <!-- Slots will be injected here by user.js -->
+        <section class="card">
+            <div class="input-group" style="max-width: 400px;">
+                <label>Find Your Doctor</label>
+                <select id="doctorSelect" onchange="loadSlots()">
+                    <option value="">-- Search by Name & Specialty --</option>
+                </select>
+            </div>
+        </section>
+
+        <div id="slots" class="slots-grid"></div>
+
+        <h2 style="margin: 3rem 0 1.5rem;">My Appointment History</h2>
+        <div id="userHistory" class="slots-grid"></div>
+    </main>
+
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h3>Finalize Booking</h3>
+            <p id="bookingDetailText" style="color:var(--primary); margin-bottom:1.5rem; font-weight:600;"></p>
+            <form id="patientForm">
+                <div class="input-group"><label>Patient Full Name</label><input type="text" id="pName" required></div>
+                <div style="display:flex; gap:1rem;">
+                    <div class="input-group" style="flex:1"><label>Age</label><input type="number" id="pAge" required></div>
+                    <div class="input-group" style="flex:1"><label>Gender</label><select id="pGender"><option>Male</option><option>Female</option></select></div>
+                </div>
+                <div class="input-group"><label>Contact Number</label><input type="tel" id="pContact" required></div>
+                <button type="button" class="btn-primary" onclick="confirmBooking()">Confirm Appointment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cancellation Reason Modal -->
+    <div id="userCancelModal" class="modal">
+        <div class="modal-content" style="width: 400px;">
+            <span class="close" onclick="closeCancelModal()">&times;</span>
+            <h3 style="color:var(--danger); margin-bottom:1rem;">Cancel Appointment</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Please provide a reason for cancelling.</p>
+            <div class="input-group">
+                <label>Reason</label>
+                <textarea id="cancelReasonText" style="height:80px;"></textarea>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:1.5rem;">
+                <button class="btn-primary" style="background:var(--secondary);" onclick="closeCancelModal()">Back</button>
+                <button class="btn-primary" style="background:var(--danger);" onclick="submitCancellation()">Confirm Cancellation</button>
             </div>
         </div>
     </div>
 
+    <div id="infoModal" class="modal">
+        <div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2 id="modalTitle"></h2><div id="modalBody"></div></div>
+    </div>
+
     <script src="user.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

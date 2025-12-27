@@ -3,39 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Slot Management</title>
+    <title>Admin Dashboard | City Hospital</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="header-area">
-            <h1>Staff Dashboard</h1>
-            <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+<body class="dashboard-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">City<span>Hospital</span></div>
+            <ul class="nav-links">
+                <li id="userGreeting" class="nav-greeting"></li>
+                <li><a href="#" onclick="showInfo('contact')">Contact Us</a></li>
+                <li><a href="#" onclick="showInfo('help')">Help</a></li>
+                <li id="logoutNav"><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dashboard-container fade-in">
+        <header class="page-header">
+            <h1>Healthcare Administration</h1>
+            <p>Onboard medical professionals and manage daily appointment availability.</p>
+        </header>
+
+        <div class="admin-actions">
+            <section class="card">
+                <h3>Onboard Doctor</h3>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input id="docName" type="text" placeholder="Dr. Jane Smith">
+                </div>
+                <div class="input-group">
+                    <label>Department / Specialty</label>
+                    <select id="docSpec">
+                        <option>General Physician</option>
+                        <option>Cardiology</option>
+                        <option>Pediatrics</option>
+                        <option>ENT Specialist</option>
+                        <option>Neurology</option>
+                        <option>Orthopedics</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="addDoctor()">Save Doctor Profile</button>
+            </section>
+
+            <section class="card">
+                <h3>Generate Slots</h3>
+                <div class="input-group">
+                    <label>Target Doctor</label>
+                    <select id="slotDocSelect">
+                        <option value="">-- Choose Profile --</option>
+                    </select>
+                </div>
+                <div style="display:flex; gap:1rem;">
+                    <div class="input-group" style="flex:1">
+                        <label>Date</label>
+                        <input type="date" id="slotDate">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Time</label>
+                        <input type="time" id="slotTime">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="addSlot()">Create Availability</button>
+            </section>
         </div>
 
-        <div class="card">
-            <h2>Add New Slot</h2>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <label>Appointment Date</label>
-                    <input type="date" id="newDate">
-                </div>
-                <div style="flex: 1; min-width: 200px;">
-                    <label>Time Slot</label>
-                    <input type="time" id="newTime">
-                </div>
+        <h2 style="margin: 3rem 0 1.5rem;">Section 1: Clinical Roster & Schedules</h2>
+        <div id="doctorList" class="slots-grid">
+            <!-- Read-only roster rendered by admin.js -->
+        </div>
+
+        <h2 style="margin: 3rem 0 1.5rem;">Section 2: Active Booked Appointments</h2>
+        <div id="appointmentList" class="slots-grid">
+            <!-- Active appointments with Reschedule/Cancel buttons -->
+        </div>
+    </main>
+
+    <!-- Reschedule Modal -->
+    <div id="rescheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRescheduleModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Reschedule Appointment</h3>
+                <p class="modal-subtext">Update appointment timing</p>
             </div>
-            <button class="btn-primary" style="margin-top: 1.5rem;" onclick="addNewSlot()">Create Slot</button>
-        </div>
-
-        <div class="card">
-            <h2>Existing Slots</h2>
-            <div id="adminSlotList" class="slot-grid">
-                <!-- Manageable slots will appear here -->
+            <div class="reschedule-summary" id="rescheduleContext">
+                <!-- Summary items injected here -->
+            </div>
+            <div class="input-group">
+                <label>Select New Available Slot</label>
+                <select id="availableSlotsSelect">
+                    <option value="">-- Choose New Time --</option>
+                </select>
+            </div>
+            <div class="modal-actions" style="margin-top: 1.5rem;">
+                <button class="btn-primary" onclick="confirmReschedule()">Confirm Reschedule</button>
             </div>
         </div>
     </div>
 
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
     <script src="admin.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

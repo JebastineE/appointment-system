@@ -3,41 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Smart Appointment System</title>
+    <title>City Hospital | Secure Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <!-- Card-based layout for the login form -->
-        <div class="card login-card">
-            <h1>Healthcare Portal</h1>
-            <p>Please log in to manage your appointments</p>
+<body class="auth-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">City<span>Hospital</span></div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showInfo('contact')">Contact Us</a></li>
+                <li><a href="#" onclick="showInfo('help')">Help</a></li>
+                <li id="logoutNav" style="display: none;"><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="auth-wrapper fade-in">
+        <div class="auth-card-landscape">
+            <div class="auth-brand-side">
+                <div class="brand-content">
+                    <div class="brand-badge">✚</div>
+                    <h2>Trusted Healthcare</h2>
+                    <p>Access our network of world-class specialists and manage your health journey seamlessly from one place.</p>
+                </div>
+            </div>
             
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="e.g., user@mail.com" required>
+            <div class="auth-form-side">
+                <div class="auth-tabs">
+                    <button id="loginBtn" class="tab-btn active" onclick="switchTab('login')">Login</button>
+                    <button id="signupBtn" class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
                 </div>
 
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter password" required>
+                <div id="loginSection" class="auth-section active">
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <label>Role</label>
+                            <select id="role">
+                                <option value="user">Patient</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" placeholder="email@hospital.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Password</label>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Sign In to Dashboard</button>
+                    </form>
                 </div>
 
-                <div class="input-group">
-                    <label for="role">Access Role</label>
-                    <select id="role">
-                        <option value="user">Patient (User)</option>
-                        <option value="admin">Staff / Admin</option>
-                    </select>
+                <div id="signupSection" class="auth-section">
+                    <form id="registerForm">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" id="regName" placeholder="Enter your name">
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="regEmail" placeholder="email@example.com">
+                        </div>
+                        <div class="input-group">
+                            <label>Password</label>
+                            <input type="password" id="regPassword" placeholder="••••••••">
+                        </div>
+                        
+                        <div class="admin-toggle-wrapper">
+                            <span>Register as Admin?</span>
+                            <label class="switch">
+                                <input type="checkbox" id="isAdminCheck" onchange="toggleAdminField()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div id="adminCodeGroup" class="input-group" style="display:none;">
+                            <label>Secret Admin Code</label>
+                            <input type="password" id="secretCode" placeholder="Enter unique code">
+                        </div>
+                        
+                        <button type="button" class="btn-primary" onclick="handleSignup()">Create Account</button>
+                    </form>
                 </div>
 
-                <button type="submit" class="btn-primary">Sign In</button>
-            </form>
-            <div id="errorMessage" class="error-msg"></div>
+                <p id="errorMessage" class="error-msg"></p>
+                <p id="successMessage" class="success-msg"></p>
+            </div>
         </div>
     </div>
-    <!-- Internal logic for login redirection -->
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

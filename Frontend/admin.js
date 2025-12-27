@@ -113,7 +113,6 @@ function deleteSlot(docId, slotId) {
         doc.slots = doc.slots.filter(s => s.id != slotId);
         localStorage.setItem("doctors", JSON.stringify(doctors));
         
-        // Also mark as cancelled in history if it was booked
         const history = JSON.parse(localStorage.getItem("hospital_history") || "[]");
         const record = history.find(h => h.slotId == slotId && h.status !== 'Cancelled');
         if (record) {
@@ -251,8 +250,7 @@ function confirmReschedule() {
     if (record) {
         record.previousDate = record.previousDate || record.date;
         record.previousTime = record.previousTime || record.time;
-        
-        // Sync full info in case doctor changed
+     
         record.slotId = newSlot.id;
         record.docId = doc.id;
         record.docName = doc.name;

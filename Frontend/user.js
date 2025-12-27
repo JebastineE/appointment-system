@@ -128,7 +128,6 @@ function renderUserHistory() {
             const card = document.createElement("div");
             card.className = `card fade-in ${isCancelled ? 'cancelled-card' : ''}`;
             
-            // Logic for "from this to this time" display
             let timingHtml = `
                 <div style="background:var(--bg-light); padding:1rem; border-radius:10px; margin: 1rem 0; border:1px solid var(--border);">
                     <div style="font-size:0.9rem;"><strong>Date:</strong> ${record.date}</div>

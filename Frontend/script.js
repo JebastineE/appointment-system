@@ -1,7 +1,6 @@
-// CONFIGURATION
+
 const ADMIN_SECRET = "HOSPITAL_ADMIN_2025";
 
-// NAV & AUTH STATE
 document.addEventListener("DOMContentLoaded", () => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"));
     const logoutNav = document.getElementById("logoutNav");
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// UI NAVIGATION
+
 function switchTab(tab) {
     const loginSection = document.getElementById("loginSection");
     const signupSection = document.getElementById("signupSection");
@@ -47,7 +46,7 @@ function clearMessages() {
     if(successEl) successEl.textContent = "";
 }
 
-// AUTH LOGIC
+
 if (document.getElementById("loginForm")) {
     document.getElementById("loginForm").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -56,7 +55,7 @@ if (document.getElementById("loginForm")) {
         const pass = document.getElementById("password").value;
         const error = document.getElementById("errorMessage");
 
-        // Hardcoded Credentials
+        
         if (role === "admin" && email === "admin@mail.com" && pass === "admin") {
             loginRedirect("admin", email, "Admin");
             return;
@@ -123,7 +122,7 @@ function logout() {
     window.location.href = "index.html";
 }
 
-// MODALS
+
 function showInfo(type) {
     const modal = document.getElementById("infoModal");
     const title = document.getElementById("modalTitle");

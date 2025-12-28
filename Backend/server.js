@@ -1,3 +1,5 @@
+import db from "./db.js";
+
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
@@ -12,6 +14,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
+
+app.get("/api/test-db", (req, res) => {
+  db.query("SELECT 1", (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json({ message: "Database working ✅" });
+  });
+});
 
 app.use(express.static(path.join(__dirname, "../Frontend")));
 
